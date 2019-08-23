@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React,{useState} from 'react';
+import UserList from './components/UserList'
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import Grid from '@material-ui/core/Grid';
+import UserModal from './components/UserModal'
 
 function App() {
+  const [open,setOpen] = useState(false)
+
+  const handleCloseModal = () => {
+      setOpen(false)
+  }
+
+  const handleOpenModal = () => {
+      setOpen(true)
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Grid container>
+          <Grid item md={2} >
+            <h5>User List</h5>
+          </Grid>
+          <Grid item md={10}>
+            <Fab color="primary" aria-label="add" size="small" onClick={handleOpenModal}>
+              <AddIcon />
+            </Fab>
+          </Grid>
+      </Grid>
+      
+     
+      <UserList />
+      <UserModal name='' age='' email='' handleCloseModal={handleCloseModal} open={open} />
     </div>
   );
 }
